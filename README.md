@@ -1,5 +1,7 @@
 # Django Simple API Proxy
 
+[![Test](https://github.com/NatLee/Django-Simple-API-Proxy/actions/workflows/test.yml/badge.svg)](https://github.com/NatLee/Django-Simple-API-Proxy/actions/workflows/test.yml)[![Release](https://github.com/NatLee/Django-Simple-API-Proxy/actions/workflows/release.yml/badge.svg)](https://github.com/NatLee/Django-Simple-API-Proxy/actions/workflows/release.yml)
+
 This is a simple tool for proxying any APIs easily on your Django server.
 
 You can use it as middleware to make a layer for user authorization or something.
@@ -9,6 +11,8 @@ You can use it as middleware to make a layer for user authorization or something
 ```bash
 pip install django-simple-api-proxy
 ```
+
+Check it in [Pypi](https://pypi.org/project/django-simple-api-proxy/).
 
 ## Quick Start
 
@@ -26,7 +30,7 @@ INSTALLED_APPS = [
 ```py
 TARGET_API_URL = 'https://httpbin.org'
 PROXY_ROUTE_PATH = 'my_test_route'
-PROXY_TARGET_PATH = ''
+PROXY_TARGET_PATH = 'get'
 ```
 
 3. Include the `django_simple_api_proxy` URL settings in your project `urls.py` like this:
@@ -127,3 +131,7 @@ class MyAPIProxy(APIProxy):
         return self.response(response)
 
 ```
+
+## More
+
+There is an example project you can check in [./example](https://github.com/NatLee/Django-Simple-API-Proxy/tree/main/example/api_proxy_example).
