@@ -1,23 +1,23 @@
-# Django Proxy API
+# Django Simple API Proxy
 
-This is a tool for proxying any APIs on Django server.
+This is a simple tool for proxying any APIs easily on your Django server.
 
 You can use it as middleware to make a layer for user authorization or something.
 
 ## Installation
 
 ```bash
-pip install djangoapiproxy
+pip install django-simple-api-proxy
 ```
 
 ## Quick Start
 
-1. Add `django_api_proxy` to your `INSTALLED_APPS` in `settings.py` like this:
+1. Add `django_simple_api_proxy` to your `INSTALLED_APPS` in `settings.py` like this:
 
 ```py
 INSTALLED_APPS = [
 ...
-'django_api_proxy',
+'django_simple_api_proxy',
 ]
 ```
 
@@ -29,13 +29,13 @@ PROXY_ROUTE_PATH = 'my_test_route'
 PROXY_TARGET_PATH = ''
 ```
 
-3. Include the `django_api_proxy` URL settings in your project `urls.py` like this:
+3. Include the `django_simple_api_proxy` URL settings in your project `urls.py` like this:
 
 ```py
 from django.conf import settings
 from django.urls import include
 urlpatterns += [
-    path(settings.PROXY_ROUTE_PATH, include('django_api_proxy.urls'))
+    path(settings.PROXY_ROUTE_PATH, include('django_simple_api_proxy.urls'))
 ]
 ```
 
@@ -54,9 +54,9 @@ And the result will be as below.
 
 ```log
 [06/Sep/2022 01:26:04] "GET /my_test_route/ HTTP/1.1" 200 314
-2022-09-06 01:26:06.338 | DEBUG    | django_api_proxy.views:get:73 - ----- Proxy GET
-2022-09-06 01:26:06.339 | DEBUG    | django_api_proxy.views:get_proxy_path:37 - URL: /get
-2022-09-06 01:26:06.340 | DEBUG    | django_api_proxy.views:update_payload:49 - Username: #anonymous
+2022-09-06 01:26:06.338 | DEBUG    | django_simple_api_proxy.views:get:73 - ----- Proxy GET
+2022-09-06 01:26:06.339 | DEBUG    | django_simple_api_proxy.views:get_proxy_path:37 - URL: /get
+2022-09-06 01:26:06.340 | DEBUG    | django_simple_api_proxy.views:update_payload:49 - Username: #anonymous
 ```
 
 ```json
@@ -100,7 +100,7 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from django_api_proxy.views import APIProxy
+from django_simple_api_proxy.views import APIProxy
 
 class MyAPIProxy(APIProxy):
     # give custom authentication

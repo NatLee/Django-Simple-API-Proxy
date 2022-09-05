@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_api_proxy' # add here
+    'django_simple_api_proxy' # add here
 ]
 
 

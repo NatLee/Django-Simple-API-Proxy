@@ -26,5 +26,5 @@ from django.conf import settings
 from django.urls import include
 
 urlpatterns += [
-    path(settings.PROXY_ROUTE_PATH, include('django_api_proxy.urls'))
+    path(settings.PROXY_ROUTE_PATH, include('django_simple_api_proxy.urls'))
 ]

@@ -4,11 +4,11 @@ with open('README.md', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='django-api-proxy',
-    fullname='django-api-proxy',
+    name='django-simple-api-proxy',
+    fullname='django-simple-api-proxy',
     author='Nat Lee',
     author_email='natlee.work@gmail.com',
-    description='Proxy any APIs you want.',
+    description='Easy to proxy any APIs you want.',
     keywords='django, api, proxy, proxy pass',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -36,15 +36,10 @@ setuptools.setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
-    python_requires='>=3.7',
+    python_requires='>=3.8',
     install_requires=['django>=4.0.0', 'requests', 'loguru', 'djangorestframework'],
     extras_require={
         'dev': ['check-manifest'],
         # 'test': ['coverage'],
     },
-    #entry_points={
-    #   'console_scripts': [
-    #      'django_api_proxy=django_api_proxy.cli:main'
-    #  ]
-    #}
 )
