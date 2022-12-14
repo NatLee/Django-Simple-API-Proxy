@@ -52,6 +52,16 @@ class APIProxy(APIView):
         )
         return params
 
+    def preprocess_request_body(self, request):
+        if request.body:
+            params = json.loads(request.body)
+        else:
+            params = {}
+        logger.debug(f"JSON Params: {params}")
+        path = self.get_proxy_path(request)
+        params = self.update_payload(request, params)
+        return path, params
+
     def send_request(
         self, method, url, params=None, data=None, json=None, timeout=180, verify=True
     ):
@@ -85,10 +95,7 @@ class APIProxy(APIView):
         logger.debug("----- Proxy POST")
         response = {"status": "error"}
         with logger.catch():
-            params = json.loads(request.body)
-            logger.debug(f"JSON Params: {params}")
-            path = self.get_proxy_path(request)
-            params = self.update_payload(request, params)
+            path, params = self.preprocess_request_body(request)
             middle_resp_ = self.send_request("POST", path, json=params)
             response = middle_resp_.json()
         return self.response(response)
@@ -98,10 +105,7 @@ class APIProxy(APIView):
         logger.debug("----- Proxy PATCH")
         response = {"status": "error"}
         with logger.catch():
-            params = json.loads(request.body)
-            logger.debug(f"JSON Params: {params}")
-            path = self.get_proxy_path(request)
-            params = self.update_payload(request, params)
+            path, params = self.preprocess_request_body(request)
             middle_resp_ = self.send_request("PATCH", path, json=params)
             response = middle_resp_.json()
         return self.response(response)
@@ -111,10 +115,7 @@ class APIProxy(APIView):
         logger.debug("----- Proxy DELETE")
         response = {"status": "error"}
         with logger.catch():
-            params = json.loads(request.body)
-            logger.debug(f"JSON Params: {params}")
-            path = self.get_proxy_path(request)
-            params = self.update_payload(request, params)
+            path, params = self.preprocess_request_body(request)
             middle_resp_ = self.send_request("DELETE", path, json=params)
             response = middle_resp_.json()
         return self.response(response)
@@ -124,10 +125,7 @@ class APIProxy(APIView):
         logger.debug("----- Proxy PUT")
         response = {"status": "error"}
         with logger.catch():
-            params = json.loads(request.body)
-            logger.debug(f"JSON Params: {params}")
-            path = self.get_proxy_path(request)
-            params = self.update_payload(request, params)
+            path, params = self.preprocess_request_body(request)
             middle_resp_ = self.send_request("PUT", path, json=params)
             response = middle_resp_.json()
         return self.response(response)
